@@ -31,6 +31,7 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             linkLabel1 = new LinkLabel();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -66,12 +67,23 @@
             linkLabel1.Text = "CREATE AN ORDER";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
+            // button2
+            // 
+            button2.Location = new Point(150, 360);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 7;
+            button2.Text = "Testing";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(373, 540);
+            Controls.Add(button2);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
@@ -88,5 +100,6 @@
         private PictureBox pictureBox1;
         private Button button1;
         private LinkLabel linkLabel1;
+        private Button button2;
     }
 }
