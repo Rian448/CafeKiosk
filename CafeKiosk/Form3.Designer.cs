@@ -36,8 +36,10 @@
             btnAddItems = new Button();
             button1 = new Button();
             panel2 = new Panel();
+            updateItems1 = new AllUserControl.UpdateItems();
             userControl11 = new AllUserControl.UserControl1();
             AddItems = new Guna.UI2.WinForms.Guna2Elipse(components);
+            guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(components);
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -86,6 +88,7 @@
             button3.TabIndex = 2;
             button3.Text = "View Inventory";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // btnAddItems
             // 
@@ -112,16 +115,25 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(255, 224, 192);
+            panel2.Controls.Add(updateItems1);
             panel2.Controls.Add(userControl11);
             panel2.Location = new Point(200, 0);
             panel2.Name = "panel2";
             panel2.Size = new Size(602, 452);
             panel2.TabIndex = 1;
             // 
+            // updateItems1
+            // 
+            updateItems1.Location = new Point(2, 0);
+            updateItems1.Name = "updateItems1";
+            updateItems1.Size = new Size(600, 450);
+            updateItems1.TabIndex = 1;
+            updateItems1.Load += updateItems1_Load;
+            // 
             // userControl11
             // 
             userControl11.BackColor = Color.FromArgb(255, 224, 192);
-            userControl11.Location = new Point(3, 3);
+            userControl11.Location = new Point(2, 3);
             userControl11.Name = "userControl11";
             userControl11.Size = new Size(600, 450);
             userControl11.TabIndex = 0;
@@ -130,6 +142,11 @@
             // 
             AddItems.BorderRadius = 30;
             AddItems.TargetControl = panel2;
+            // 
+            // guna2Elipse1
+            // 
+            guna2Elipse1.BorderRadius = 30;
+            guna2Elipse1.TargetControl = panel2;
             // 
             // Form3
             // 
@@ -157,5 +174,7 @@
         private Button button1;
         private Guna.UI2.WinForms.Guna2Elipse AddItems;
         private AllUserControl.UserControl1 userControl11;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
+        private AllUserControl.UpdateItems updateItems1;
     }
 }

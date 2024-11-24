@@ -100,6 +100,7 @@ namespace CafeKiosk.AllUserControl
         protected int n, total = 0;
         private void btnAddtoCart_Click(object sender, EventArgs e)
         {
+
             if (txtTotal.Text != "0" && txtTotal.Text != "")
             {
                 n = guna2DataGridView1.Rows.Add();
@@ -110,11 +111,17 @@ namespace CafeKiosk.AllUserControl
 
                 total = total + int.Parse(txtTotal.Text);
                 labelTotalAmount.Text = "Php " + total;
+
+                txtItemName.Clear();
+                txtPrice.Clear();
+                txtTotal.Clear();
             }
             else
             {
                 MessageBox.Show("Quantity is needed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
+
         }
 
         int amount;
