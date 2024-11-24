@@ -43,7 +43,8 @@
             // 
             // button1
             // 
-            button1.Location = new Point(12, 284);
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(4, 290);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
@@ -63,18 +64,21 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(255, 224, 192);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(61, 450);
+            panel1.Size = new Size(82, 450);
             panel1.TabIndex = 2;
+            panel1.Paint += panel1_Paint;
             // 
             // button2
             // 
-            button2.Location = new Point(0, 80);
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(4, 91);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 2;
@@ -84,28 +88,32 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.FromArgb(255, 224, 192);
             panel2.Controls.Add(addOrder1);
             panel2.Controls.Add(welcome1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(61, 0);
+            panel2.Location = new Point(82, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(739, 450);
+            panel2.Size = new Size(718, 450);
             panel2.TabIndex = 3;
+            panel2.Paint += panel2_Paint;
             // 
             // addOrder1
             // 
-            addOrder1.Font = new Font("Showcard Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            addOrder1.Location = new Point(0, 3);
+            addOrder1.BackColor = Color.FromArgb(255, 224, 192);
+            addOrder1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addOrder1.Location = new Point(0, 0);
             addOrder1.Margin = new Padding(4, 3, 4, 3);
             addOrder1.Name = "addOrder1";
-            addOrder1.Size = new Size(771, 450);
+            addOrder1.Size = new Size(718, 450);
             addOrder1.TabIndex = 1;
+            addOrder1.Load += addOrder1_Load;
             // 
             // welcome1
             // 
-            welcome1.Location = new Point(0, 3);
+            welcome1.Location = new Point(123, 12);
             welcome1.Name = "welcome1";
-            welcome1.Size = new Size(600, 450);
+            welcome1.Size = new Size(486, 450);
             welcome1.TabIndex = 0;
             // 
             // guna2Elipse1
@@ -117,6 +125,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(255, 224, 192);
             ClientSize = new Size(800, 450);
             Controls.Add(panel2);
             Controls.Add(panel1);

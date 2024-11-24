@@ -48,5 +48,20 @@ namespace CafeKiosk
         {
             addOrder1.Visible = false;
         }
+
+        private void addOrder1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
