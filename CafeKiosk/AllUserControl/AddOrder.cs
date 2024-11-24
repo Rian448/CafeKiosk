@@ -22,9 +22,9 @@ namespace CafeKiosk.AllUserControl
 
         public void ItemsAdd()
         {
-            guna2ComboBox1.Items.Add("Cone");
-            guna2ComboBox1.Items.Add("Flavors");
-            guna2ComboBox1.Items.Add("Addons");
+            comboCategory.Items.Add("Cone");
+            comboCategory.Items.Add("Flavors");
+            comboCategory.Items.Add("Addons");
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -34,15 +34,9 @@ namespace CafeKiosk.AllUserControl
 
         private void guna2ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {//getting data in database and putting selected category items in the listbox
-            listBox1.Items.Clear();
-            String category = guna2ComboBox1.Text;
-            query = "Select name from items where Category = '" + category + "'";
-            DataSet ds = fn.getData(query);
-
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                listBox1.Items.Add(ds.Tables[0].Rows[i][0].ToString());
-            }
+            String category = comboCategory.Text;
+            query = "Select ItemName from items where Category = '" + category + "'";
+            showItemList(query);
         }
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -56,12 +50,15 @@ namespace CafeKiosk.AllUserControl
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {//SearchBar
+        {
+            String category = comboCategory.Text;
+            query = "Select ItemName from items where Category = '" + category + "'and ItemName like '" + txtSearch.Text + "%'";
+            showItemList(query);
+        }
+        private void showItemList(String query)
+        {
             listBox1.Items.Clear();
-            String category = guna2ComboBox1.Text;
-            query = "Select name from items where Category = '" + category + "'and ItemName like '" + guna2TextBox1.Text + "%'";
             DataSet ds = fn.getData(query);
-
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 listBox1.Items.Add(ds.Tables[0].Rows[i][0].ToString());
@@ -70,18 +67,18 @@ namespace CafeKiosk.AllUserControl
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            guna2TextBox4.Clear();
-            guna2NumericUpDown1.ResetText();
+            txtTotal.Clear();
+            txtQuantityUpDown.ResetText();
 
             String text = listBox1.GetItemText(listBox1.SelectedItem);
-            guna2TextBox2.Text = text;
+            txtItemName.Text = text;
 
             query = "select Price from items where ItemName = '" + text + "'";
             DataSet ds = fn.getData(query);
 
             try
             {
-                guna2TextBox3.Text = ds.Tables[0].Rows[0][0].ToString();
+                txtPrice.Text = ds.Tables[0].Rows[0][0].ToString();
             }
             catch { }
 
@@ -89,10 +86,56 @@ namespace CafeKiosk.AllUserControl
 
         private void guna2NumericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            Int64 quantity = Int64.Parse(guna2NumericUpDown1.Value.ToString());
-            Int64 price = Int64.Parse(guna2TextBox3.Text);
+            Int64 quantity = Int64.Parse(txtQuantityUpDown.Value.ToString());
+            Int64 price = Int64.Parse(txtPrice.Text);
 
-            guna2TextBox4.Text = (quantity * price).ToString();
+            txtTotal.Text = (quantity * price).ToString();
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected int n, total = 0;
+        private void btnAddtoCart_Click(object sender, EventArgs e)
+        {
+            if (txtTotal.Text != "0" && txtTotal.Text != "")
+            {
+                n = guna2DataGridView1.Rows.Add();
+                guna2DataGridView1.Rows[n].Cells[0].Value = txtItemName.Text;
+                guna2DataGridView1.Rows[n].Cells[1].Value = txtPrice.Text;
+                guna2DataGridView1.Rows[n].Cells[2].Value = txtQuantityUpDown.Value;
+                guna2DataGridView1.Rows[n].Cells[3].Value = txtTotal.Text;
+
+                total = total + int.Parse(txtTotal.Text);
+                labelTotalAmount.Text = "Php " + total;
+            }
+            else
+            {
+                MessageBox.Show("Quantity is needed!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        int amount;
+        private void guna2DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                amount = int.Parse(guna2DataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString());
+            }
+            catch { }
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                guna2DataGridView1.Rows.RemoveAt(this.guna2DataGridView1.SelectedRows[0].Index);
+            }
+            catch { }
+            total -= amount;
+            labelTotalAmount.Text = "Php " + total;
         }
     }
 }
