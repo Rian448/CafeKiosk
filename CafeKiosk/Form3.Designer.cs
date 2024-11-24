@@ -44,6 +44,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = Color.FromArgb(255, 224, 192);
             panel1.Controls.Add(button5);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
@@ -56,6 +57,7 @@
             // 
             // button5
             // 
+            button5.FlatStyle = FlatStyle.Flat;
             button5.Location = new Point(0, 426);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
@@ -66,6 +68,7 @@
             // 
             // button4
             // 
+            button4.FlatStyle = FlatStyle.Flat;
             button4.Location = new Point(3, 3);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
@@ -76,6 +79,7 @@
             // 
             // button3
             // 
+            button3.FlatStyle = FlatStyle.Flat;
             button3.Location = new Point(27, 145);
             button3.Name = "button3";
             button3.Size = new Size(165, 33);
@@ -85,6 +89,7 @@
             // 
             // btnAddItems
             // 
+            btnAddItems.FlatStyle = FlatStyle.Flat;
             btnAddItems.Location = new Point(27, 112);
             btnAddItems.Name = "btnAddItems";
             btnAddItems.Size = new Size(165, 27);
@@ -95,6 +100,8 @@
             // 
             // button1
             // 
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = SystemColors.ControlText;
             button1.Location = new Point(27, 76);
             button1.Name = "button1";
             button1.Size = new Size(165, 30);
@@ -104,6 +111,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.FromArgb(255, 224, 192);
             panel2.Controls.Add(userControl11);
             panel2.Location = new Point(200, 0);
             panel2.Name = "panel2";
@@ -112,6 +120,7 @@
             // 
             // userControl11
             // 
+            userControl11.BackColor = Color.FromArgb(255, 224, 192);
             userControl11.Location = new Point(3, 3);
             userControl11.Name = "userControl11";
             userControl11.Size = new Size(600, 450);
@@ -126,6 +135,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(255, 224, 192);
             ClientSize = new Size(800, 450);
             Controls.Add(panel2);
             Controls.Add(panel1);

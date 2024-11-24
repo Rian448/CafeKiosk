@@ -18,5 +18,15 @@ namespace CafeKiosk
             Form4 form4 = new Form4();
             form4.Show(); this.Hide();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
