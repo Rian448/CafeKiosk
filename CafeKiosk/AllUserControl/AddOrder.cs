@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -94,7 +95,7 @@ namespace CafeKiosk.AllUserControl
 
         private void guna2Button3_Click(object sender, EventArgs e)
         {
-
+            SaveOrderToDatabase();
         }
 
         protected int n, total = 0;
@@ -144,5 +145,63 @@ namespace CafeKiosk.AllUserControl
             total -= amount;
             labelTotalAmount.Text = "Php " + total;
         }
+        private decimal CalculateTotal()
+        {
+            decimal totalAmount = 0;
+
+            n = guna2DataGridView1.Rows.Add();
+            guna2DataGridView1.Rows[n].Cells[3].Value = txtTotal.Text;
+
+            if (int.TryParse(txtTotal.Text, out int totalValue))
+            {
+                totalAmount += totalValue;
+            }
+            return totalAmount;
+
+        }
+        string CombineItemsFromDataGridView()
+        {
+            StringBuilder combinedItems = new StringBuilder();
+
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    // Extract item details from each row
+                    string itemName = row.Cells[0].Value.ToString();  // Item name
+                    int quantity = Convert.ToInt32(row.Cells[2].Value);  // Quantity
+                    decimal price = Convert.ToDecimal(row.Cells[3].Value);  // Total price for that item (already calculated)
+
+                    // Add each item to the combined string
+                    combinedItems.AppendLine($"{itemName} - {quantity} x {price:C}");
+                }
+            }
+
+            return combinedItems.ToString();
+        }
+
+        // Save the order details (items and total price) to the database
+        void SaveOrderToDatabase()
+        {
+            // Combine all items into a single string
+            string combinedItems = CombineItemsFromDataGridView();
+
+            // Calculate the total price for the order
+            decimal totalPrice = CalculateTotal();
+
+            // Define the query to insert the order details into the database
+            string query = "INSERT INTO ItemsOrdered (OrderDetails, TotalPrice) VALUES (@orderDetails, @totalPrice)";
+
+            // Establish a connection and execute the query
+            MySqlConnection con = fn.getConnection();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@orderDetails", combinedItems);  // Insert the combined item details
+            cmd.Parameters.AddWithValue("@totalPrice", totalPrice);  // Insert the total price
+
+            con.Open();
+            cmd.ExecuteNonQuery();  // Execute the query
+            con.Close();
+        }
+
     }
 }
