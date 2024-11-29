@@ -158,6 +158,48 @@ namespace CafeKiosk.AllUserControl
         }
             return totalAmount;
         }
+        string CombineItemsFromDataGridView()
+        {
+            StringBuilder combinedItems = new StringBuilder();
 
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    // Extract item details from each row
+                    string itemName = row.Cells[0].Value.ToString();  // Item name
+                    int quantity = Convert.ToInt32(row.Cells[2].Value);  // Quantity
+                    decimal price = Convert.ToDecimal(row.Cells[3].Value);  // Total price for that item (already calculated)
+                    
+                    // Add each item to the combined string
+                    combinedItems.AppendLine($"{itemName} - {quantity} x {price:C}");
+                }
+            }
+
+            return combinedItems.ToString();
+        }
+
+        // Save the order details (items and total price) to the database
+        void SaveOrderToDatabase()
+        {
+            // Combine all items into a single string
+            string combinedItems = CombineItemsFromDataGridView();
+
+            // Calculate the total price for the order
+            decimal totalPrice = CalculateTotal();
+
+            // Define the query to insert the order details into the database
+            string query = "INSERT INTO ItemsOrdered (OrderDetails, TotalPrice) VALUES (@orderDetails, @totalPrice)";
+
+            // Establish a connection and execute the query
+            MySqlConnection con = fn.getConnection();
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@OrderDetails", combinedItems);  // Insert the combined item details
+            cmd.Parameters.AddWithValue("@TotalPrice", totalPrice);  // Insert the total price
+
+            con.Open();
+            cmd.ExecuteNonQuery();  // Execute the query
+            con.Close();
+        }
     }
 }
