@@ -145,6 +145,7 @@ namespace CafeKiosk.AllUserControl
             total -= amount;
             labelTotalAmount.Text = "Php " + total;
         }
+
         private decimal CalculateTotal()
         {
             decimal totalAmount = 0;
@@ -203,5 +204,20 @@ namespace CafeKiosk.AllUserControl
             con.Close();
         }
 
+=======
+
+        private decimal CalculateTotal()
+        {
+            decimal totalAmount = 0;
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+        {
+            if (!row.IsNewRow)
+            {
+                decimal rowPrice = Convert.ToDecimal(row.Cells["Price"].Value);
+                totalAmount += rowPrice;
+            }
+        }
+            return totalAmount;
+        }
     }
 }
