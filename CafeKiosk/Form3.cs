@@ -33,6 +33,7 @@ namespace CafeKiosk
         {
             userControl11.Visible = true;
             updateItems1.Visible = false;
+            removeItem1.Visible = false;
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
@@ -49,6 +50,14 @@ namespace CafeKiosk
         {
             updateItems1.Visible = true;
             userControl11.Visible = false;
+            removeItem1.Visible = false;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            updateItems1.Visible = false;
+            userControl11.Visible = false;
+            removeItem1.Visible = true;
         }
     }
 }
