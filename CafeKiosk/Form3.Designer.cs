@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
+            button2 = new Button();
             button5 = new Button();
             button4 = new Button();
             button3 = new Button();
@@ -40,6 +41,8 @@
             userControl11 = new AllUserControl.UserControl1();
             AddItems = new Guna.UI2.WinForms.Guna2Elipse(components);
             guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(components);
+            guna2Elipse2 = new Guna.UI2.WinForms.Guna2Elipse(components);
+            removeItem1 = new AllUserControl.RemoveItem();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -47,6 +50,7 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(255, 224, 192);
+            panel1.Controls.Add(button2);
             panel1.Controls.Add(button5);
             panel1.Controls.Add(button4);
             panel1.Controls.Add(button3);
@@ -56,6 +60,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(203, 452);
             panel1.TabIndex = 0;
+            // 
+            // button2
+            // 
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(27, 184);
+            button2.Name = "button2";
+            button2.Size = new Size(165, 33);
+            button2.TabIndex = 5;
+            button2.Text = "Remove Items";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click_1;
             // 
             // button5
             // 
@@ -115,6 +130,7 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(255, 224, 192);
+            panel2.Controls.Add(removeItem1);
             panel2.Controls.Add(updateItems1);
             panel2.Controls.Add(userControl11);
             panel2.Location = new Point(200, 0);
@@ -148,6 +164,17 @@
             guna2Elipse1.BorderRadius = 30;
             guna2Elipse1.TargetControl = panel2;
             // 
+            // guna2Elipse2
+            // 
+            guna2Elipse2.TargetControl = panel2;
+            // 
+            // removeItem1
+            // 
+            removeItem1.Location = new Point(0, 0);
+            removeItem1.Name = "removeItem1";
+            removeItem1.Size = new Size(600, 450);
+            removeItem1.TabIndex = 2;
+            // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -176,5 +203,8 @@
         private AllUserControl.UserControl1 userControl11;
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private AllUserControl.UpdateItems updateItems1;
+        private Button button2;
+        private Guna.UI2.WinForms.Guna2Elipse guna2Elipse2;
+        private AllUserControl.RemoveItem removeItem1;
     }
 }
